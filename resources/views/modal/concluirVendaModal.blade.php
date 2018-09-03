@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Finalizar Venda</h4>
             </div>
-            {!! Form::open(array('action' => 'SellController@concluirVenda', 'method' => 'post')) !!}
+            {!! Form::open(array('action' => 'SellController@concluirVenda', 'method' => 'post', 'onsubmit' => 'return enviardados();')) !!}
             <div class="modal-body">
                 {{--<br><p style="display:inline; vertical-align: middle;font-weight: bold">Informe o vendedor: </p>
                 <select style="max-height: 50px; overflow: auto" class="selectpicker" data-live-search="true" name="user_id">
@@ -18,7 +18,7 @@
                 <table class="table ">
                     <tr>
                         <td width="250px"><p style="display:inline; vertical-align: middle;font-weight: bold">Forma de pagamento: </p></td>
-                        <td td width="250px">
+                        <td width="250px">
                             <select class="select" id="formaPagamentoTotal" required name="formaPagamento" style="width: 212px; text-decoration-color: #0f0f0f" onclick='troco();total();'>
                                 <option value="">Selecione...</option>
                                 <option value="1">Dinheiro</option>
@@ -84,4 +84,15 @@
         v=v.replace(/^0+/, '');
         $(this).val(v);
     });
+
+    function enviardados() {
+
+        // if (document.formulario.dinheiro.value === "" || document.formulario.dinheiro.value === 1) {
+        //     alert("Valor não pode ser zerado!");
+        //     document.formulario.dinheiro.focus();
+        //     return false;
+        // }
+
+        return false;
+    }
 </script>

@@ -820,7 +820,7 @@ class SellController extends Controller
                             </tr>';
             $bonificaTableCont = [];
             foreach ($bonificacoes as $bon){
-                $item = Item::find($bon->item_id);
+                $item = Item::  find($bon->item_id);
                 $product = Product::find($item->product_id);
                 $tupla = '      <tr>
                                 <td style="vertical-align: middle" align="left">'.$product->barcode.'</td>
