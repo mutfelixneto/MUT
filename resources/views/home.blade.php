@@ -76,7 +76,7 @@
             @endif
         </div>
         <div class="row">
-            <div class="col-xs-7 col-sm-6 col-lg-8" style="background-color:#000000; background-image:url({{asset('storage/images/brands/listaEsquerda.jpg')}}); overflow: auto; margin-left:-61px; border: solid; border-width: 1px; height: 450px;" id="tabsCategorias" data-url="<?= route('admin.categories.create') ?>">
+            <div class="col-xs-7 col-sm-6 col-lg-8" style="background-color:#000000; background-image:url({{asset('storage/images/brands/listaEsquerda.jpg')}});  margin-left:-61px; border: solid; border-width: 1px; height: 450px;" id="tabsCategorias" data-url="<?= route('admin.categories.create') ?>">
                 @php
                     foreach($categories as $category){
                         $brands = App\Models\Brand::all()->where('category_id', '=', $category->id)->where('status','=', 1);
@@ -91,7 +91,7 @@
 
                        $names[] = [
                                 'title' => '<p style="text-align:center; font-size:12px" rel="tooltip" title="'.$category->name.' : '.$category->description.'">'.substr($category->name,0,9).'</p>',
-                                'content' => "<div>$string</div>"
+                                'content' => '<div style="overflow-y: scroll;height: 360px;">'.$string.'</div>'
                             ];
                             unset($listadivs);
                      }
