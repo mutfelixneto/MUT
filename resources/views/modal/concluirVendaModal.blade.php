@@ -33,6 +33,8 @@
                     @if(isset($order))
                         <table class="table">
                             <tr> <td width="250px">Valor da venda (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num1" value="{{$order->total}}" disabled="true" /></td></tr>
+                            <tr> <td width="250px">Valor Recebido (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num2" onblur="calcular()" /></td></tr>
+                            <tr> <td width="250px">Troco (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="resultado1" /></td></tr>
                         </table>
                     @endif
                 </div>
@@ -75,7 +77,7 @@
     </div>
 </div>
 <script>
-    $('#num2, #num3, #debito, #credito, #dinheiro').keyup(function(){
+    $('#num1, #num2, #num3, #debito, #credito, #dinheiro').keyup(function(){
         var v = $(this).val();
         v=v.replace(/\D/g,'');
         v=v.replace(/(\d{1,2})$/, ',$1');
@@ -86,13 +88,48 @@
     });
 
     function enviardados() {
+        if (document.getElementById('formaPagamentoParcial').value === '4') {
+            var dinheiro = document.getElementById('dinheiro').value;
+            if (dinheiro !== null && dinheiro !== '') {
+                dinheiro = dinheiro.replace(/\D/g, '');
+                if (dinheiro > 0)
+                    dinheiro = dinheiro / 100;
+            } else
+                dinheiro = 0;
 
-        // if (document.formulario.dinheiro.value === "" || document.formulario.dinheiro.value === 1) {
-        //     alert("Valor não pode ser zerado!");
-        //     document.formulario.dinheiro.focus();
-        //     return false;
-        // }
+            var debito = document.getElementById('debito').value;
+            if (debito !== null && debito !== '') {
+                debito = debito.replace(/\D/g, '');
+                if (debito > 0)
+                    debito = debito / 100;
+            } else
+                debito = 0;
 
-        return false;
+            var credito = document.getElementById('credito').value;
+            if (credito !== null && credito !== '') {
+                credito = credito.replace(/\D/g, '');
+                if (credito > 0)
+                    credito = credito / 100;
+            } else
+                credito = 0;
+
+            var soma = parseFloat(dinheiro) + parseFloat(debito) + parseFloat(credito);
+
+            var venda = document.getElementById('num1').value;
+
+            final = parseFloat(venda).toFixed(2) - parseFloat(soma).toFixed(2);
+
+            if (final > 0.00)
+                window.alert('Valor informado é inferior ao valor total da venda');
+            if (final < 0.00)
+                window.alert('Valor informado é superior ao valor total da venda');
+
+            if (final === 0)
+                return true;
+
+            window.alert(final);
+
+            return false;
+        }
     }
 </script>

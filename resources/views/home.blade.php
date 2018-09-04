@@ -313,17 +313,28 @@
 
         function calcular() {
             var num1 = Number(document.getElementById("num1").value);
-            var num2 = Number(document.getElementById("num2").value);
-            var num3 = Number(document.getElementById("num3").value);
-            var elemResult = document.getElementById("resultado");
-            var sub = num2 - num1 + num3;
+            var num2 = document.getElementById("num2").value;
+            // var num3 = Number(document.getElementById("num3").value);
 
-            if (elemResult.textContent === undefined) {
-                elemResult.textContent = "Troco (R$): " + sub.toFixed(2) + "";
-            }
-            else { // IE
-                elemResult.innerText = "Troco (R$): " + sub.toFixed(2) + "";
-            }
+            if (num2 !== null && num2 !== '')
+            {
+                num2=num2.replace(/\D/g,'');
+                if(num2 > 0)
+                    num2 = num2/100;
+            }else
+                num2 = 0;
+
+            var sub = num2 - num1;
+            sub=sub.toFixed(2);
+            sub=sub.toString();
+            sub=sub.replace(/\D/g,'');
+            sub=sub.replace(/(\d{1,2})$/, ',$1');
+            sub=sub.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            sub = sub != ''?'R$ '+sub:'';
+            sub=sub.replace(/^0+/, '');
+
+            document.getElementById('resultado1').value = sub;
+
         }
         function mostraDesconto(){
             document.getElementById('valorDesconto').style.display = 'block';
