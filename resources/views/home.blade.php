@@ -90,8 +90,8 @@
                         $string = implode($listadivs);
 
                        $names[] = [
-                                'title' => '<p style="text-align:center; font-size:12px" rel="tooltip" title="'.$category->name.' : '.$category->description.'">'.substr($category->name,0,9).'</p>',
-                                'content' => '<div style="overflow-y: scroll;height: 360px;">'.$string.'</div>'
+                                'title' => '<p style="text-align:center; font-size:12px" rel="tooltip" title="'.$category->name.' : '.$category->description.'" >'.substr($category->name,0,9).'</p>',
+                                'content' => '<div class="chico" style="overflow-y: scroll">'.$string.'</div>'
                             ];
                             unset($listadivs);
                      }
@@ -263,6 +263,29 @@
         setTimeout(function() {
             document.getElementById( "codBarQtd" ).focus();
         }, 0 );
+
+        $(document).ready(function(){
+            var y = document.getElementById("tabsCategorias").style.height;
+            var z = y.replace(/\D/g,'');
+            var tabCount = $('#tabsCategorias > ul> li').length;
+            if(tabCount > 7 && tabCount < 15) {
+                z = z - 90  ;
+                $(".chico").css({"height": z + "px"}) ;
+            }
+            if(tabCount > 14 && tabCount < 22) {
+                z = z - 135  ;
+                $(".chico").css({"height": z + "px"}) ;
+            }
+            if(tabCount > 21 && tabCount < 29) {
+                z = z - 180  ;
+                $(".chico").css({"height": z + "px"}) ;
+            }
+        });
+
+        $(".tab-content").click(function(){
+            var newHeight = $(this).height();
+            alert(newHeight)
+        });
 
         function incrementaProduto($id) {
             document.getElementById($id).stepUp(1);
