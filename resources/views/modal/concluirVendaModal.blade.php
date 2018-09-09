@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Finalizar Venda</h4>
             </div>
-            {!! Form::open(array('action' => 'SellController@concluirVenda', 'method' => 'post', 'onsubmit' => 'return enviardados();')) !!}
+            {!! Form::open(array('action' => 'SellController@concluirVenda', 'method' => 'post', 'onsubmit' => 'return enviardadosT();')) !!}
             <div class="modal-body">
                 {{--<br><p style="display:inline; vertical-align: middle;font-weight: bold">Informe o vendedor: </p>
                 <select style="max-height: 50px; overflow: auto" class="selectpicker" data-live-search="true" name="user_id">
@@ -32,9 +32,9 @@
                 <div id="troco" style="display: none;">
                     @if(isset($order))
                         <table class="table">
-                            <tr> <td width="250px">Valor da venda (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num1" value="{{$order->total}}" disabled="true" /></td></tr>
+                            <tr> <td width="250px">Valor da venda (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num1T" value="{{$order->total}}" disabled="true" /></td></tr>
                             <tr> <td width="250px">Valor Recebido (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num2" onblur="calcular()" /></td></tr>
-                            <tr> <td width="250px">Troco (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="resultado1" /></td></tr>
+                            <tr> <td width="250px">Troco (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="resultadoT" /></td></tr>
                         </table>
                     @endif
                 </div>
@@ -42,16 +42,16 @@
                     @if(isset($order))
                         <table class="table">
                             <tr>
-                                <td>Valor Dinheiro: </td>
-                                <td><input style="width:120px" id="dinheiro" name="dinheiro" type="text" max="'.$order->total.'"></td>
+                                <td>Valor dinheiroT: </td>
+                                <td><input style="width:120px" id="dinheiroT" name="dinheiroT" type="text" max="'.$order->total.'"></td>
                             </tr>
                             <tr>
                                 <td>Valor Débito: </td>
-                                <td><input style="width:120px" id="debito" name="debito" type="text" max="'.$order->total.'"></td>
+                                <td><input style="width:120px" id="debitoT" name="debitoT" type="text" max="'.$order->total.'"></td>
                             </tr>
                             <tr>
                                 <td>Valor Crédito: </td>
-                                <td><input style="width:120px" id="credito" name="credito" type="text" max="'.$order->total.' "></td>
+                                <td><input style="width:120px" id="creditoT" name="creditoT" type="text" max="'.$order->total.' "></td>
                             </tr>
                         </table>
                     @endif
@@ -77,7 +77,7 @@
     </div>
 </div>
 <script>
-    $('#num1, #num2, #num3, #debito, #credito, #dinheiro').keyup(function(){
+    $('#num1T, #num2, #num3, #debitoT, #creditoT, #dinheiroT').keyup(function(){
         var v = $(this).val();
         v=v.replace(/\D/g,'');
         v=v.replace(/(\d{1,2})$/, ',$1');
@@ -87,35 +87,35 @@
         $(this).val(v);
     });
 
-    function enviardados() {
-        if (document.getElementById('formaPagamentoParcial').value === '4') {
-            var dinheiro = document.getElementById('dinheiro').value;
-            if (dinheiro !== null && dinheiro !== '') {
-                dinheiro = dinheiro.replace(/\D/g, '');
-                if (dinheiro > 0)
-                    dinheiro = dinheiro / 100;
+    function enviardadosT() {
+        if (document.getElementById('formaPagamentoTotal').value === '4') {
+            var dinheiroT = document.getElementById('dinheiroT').value;
+            if (dinheiroT !== null && dinheiroT !== '') {
+                dinheiroT = dinheiroT.replace(/\D/g, '');
+                if (dinheiroT > 0)
+                    dinheiroT = dinheiroT / 100;
             } else
-                dinheiro = 0;
+                dinheiroT = 0;
 
-            var debito = document.getElementById('debito').value;
-            if (debito !== null && debito !== '') {
-                debito = debito.replace(/\D/g, '');
-                if (debito > 0)
-                    debito = debito / 100;
+            var debitoT = document.getElementById('debitoT').value;
+            if (debitoT !== null && debitoT !== '') {
+                debitoT = debitoT.replace(/\D/g, '');
+                if (debitoT > 0)
+                    debitoT = debitoT / 100;
             } else
-                debito = 0;
+                debitoT = 0;
 
-            var credito = document.getElementById('credito').value;
-            if (credito !== null && credito !== '') {
-                credito = credito.replace(/\D/g, '');
-                if (credito > 0)
-                    credito = credito / 100;
+            var creditoT = document.getElementById('creditoT').value;
+            if (creditoT !== null && creditoT !== '') {
+                creditoT = creditoT.replace(/\D/g, '');
+                if (creditoT > 0)
+                    creditoT = creditoT / 100;
             } else
-                credito = 0;
+                creditoT = 0;
 
-            var soma = parseFloat(dinheiro) + parseFloat(debito) + parseFloat(credito);
+            var soma = parseFloat(dinheiroT) + parseFloat(debitoT) + parseFloat(creditoT);
 
-            var venda = document.getElementById('num1').value;
+            var venda = document.getElementById('num1T').value;
 
             final = parseFloat(venda).toFixed(2) - parseFloat(soma).toFixed(2);
 
@@ -126,8 +126,6 @@
 
             if (final === 0)
                 return true;
-
-            window.alert(final);
 
             return false;
         }

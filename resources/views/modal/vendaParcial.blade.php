@@ -5,11 +5,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Venda Parcial</h4>
             </div>
-            {!! Form::open(array('action' => 'SellController@vendaParcial', 'method' => 'post', 'onsubmit' => 'return enviardados();')) !!}
+            {!! Form::open(array('action' => 'SellController@vendaParcial', 'method' => 'post', 'onsubmit' => 'return enviardadosP();')) !!}
             <div class="modal-body">
                 @php
                     if(isset($order))
                         if(\App\Http\Controllers\OrderController::possuiPagamento($order)){
+                        echo '<input type="hidden" id="num1P" value="'.$order->total.'"/>';
                     echo '<br><p style="display:inline; vertical-align: middle;font-weight: bold">Informe o valor a ser pago: </p>
                     <select class="" id="formaPagamentoParcial" name="formaPagamento" style="width: 212px;" disabled="true">
                         <option value="4">Múltiplo</option>
@@ -18,16 +19,16 @@
                         if(isset($order))
                             echo '<table class="table">
                             <tr>
-                                <td>Valor Dinheiro: </td>
-                                <td><input style="width:120px" id="dinheiroP" name="dinheiro" type="text" max="'.$order->total.'"  ></td>
+                                <td>Valor dinheiroP: </td>
+                                <td><input style="width:120px" id="dinheiroP" name="dinheiroP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             <tr>
                                 <td>Valor Débito: </td>
-                                <td><input style="width:120px" id="debitoP" name="debito" type="text" max="'.$order->total.'"  ></td>
+                                <td><input style="width:120px" id="debitoP" name="debitoP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             <tr>
                                 <td>Valor Crédito: </td>
-                                <td><input style="width:120px" id="creditoP" name="credito" type="text" max="'.$order->total.'"  ></td>
+                                <td><input style="width:120px" id="creditoP" name="creditoP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             </table>
 
@@ -39,6 +40,8 @@
                             echo 'Não existe pedido em aberto!';
                        }
                         else{
+
+                        echo '<input type="hidden" id="num1P" value="'.$order->total.'"/>';
                         echo '<br><p style="display:inline; vertical-align: middle;font-weight: bold">Selecione a forma de pagamento: </p>
                     <select class="" id="formaPagamentoParcial" required name="formaPagamento" style="width: 212px;" onclick="parcial()">
                         <option value="">Selecione...</option>
@@ -52,16 +55,16 @@
                             echo '
                             <table class="table">
                             <tr>
-                                <td>Valor Dinheiro: </td>
-                                <td><input style="width:120px" id="dinheiroP" name="dinheiro" type="text" max="'.$order->total.'"  ></td>
+                                <td>Valor dinheiroP: </td>
+                                <td><input style="width:120px" id="dinheiroP" name="dinheiroP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             <tr>
                                 <td>Valor Débito: </td>
-                                <td><input style="width:120px" id="debitoP" name="debito" type="text" max="'.$order->total.'"  ></td>
+                                <td><input style="width:120px" id="debitoP" name="debitoP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             <tr>
                                 <td>Valor Crédito: </td>
-                                <td><input style="width:120px" id="creditoP" name="credito" type="text" max="'.$order->total.'"  ></td>
+                                <td><input style="width:120px" id="creditoP" name="creditoP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             </table>
                     </div>
@@ -95,47 +98,43 @@
         $(this).val(v);
     });
 
-    function enviardados() {
+    function enviardadosP() {
         if (document.getElementById('formaPagamentoParcial').value === '4') {
-            var dinheiro = document.getElementById('dinheiroP').value;
-            if (dinheiro !== null && dinheiro !== '') {
-                dinheiro = dinheiro.replace(/\D/g, '');
-                if (dinheiro > 0)
-                    dinheiro = dinheiro / 100;
+            var dinheiroP = document.getElementById('dinheiroP').value;
+            if (dinheiroP !== null && dinheiroP !== '') {
+                dinheiroP = dinheiroP.replace(/\D/g, '');
+                if (dinheiroP > 0)
+                    dinheiroP = dinheiroP / 100;
             } else
-                dinheiro = 0;
+                dinheiroP = 0;
 
-            var debito = document.getElementById('debitoP').value;
-            if (debito !== null && debito !== '') {
-                debito = debito.replace(/\D/g, '');
-                if (debito > 0)
-                    debito = debito / 100;
+            var debitoP = document.getElementById('debitoP').value;
+            if (debitoP !== null && debitoP !== '') {
+                debitoP = debitoP.replace(/\D/g, '');
+                if (debitoP > 0)
+                    debitoP = debitoP / 100;
             } else
-                debito = 0;
+                debitoP = 0;
 
-            var credito = document.getElementById('creditoP').value;
-            if (credito !== null && credito !== '') {
-                credito = credito.replace(/\D/g, '');
-                if (credito > 0)
-                    credito = credito / 100;
+            var creditoP = document.getElementById('creditoP').value;
+            if (creditoP !== null && creditoP !== '') {
+                creditoP = creditoP.replace(/\D/g, '');
+                if (creditoP > 0)
+                    creditoP = creditoP / 100;
             } else
-                credito = 0;
+                creditoP = 0;
 
-            var soma = parseFloat(dinheiro) + parseFloat(debito) + parseFloat(credito);
+            var soma = parseFloat(dinheiroP) + parseFloat(debitoP) + parseFloat(creditoP);
 
-            var venda = document.getElementById('num1').value;
+            var venda = document.getElementById('num1P').value;
 
             final = parseFloat(venda).toFixed(2) - parseFloat(soma).toFixed(2);
 
-            if (final > 0.00)
-                window.alert('Valor informado é inferior ao valor total da venda');
             if (final < 0.00)
                 window.alert('Valor informado é superior ao valor total da venda');
 
-            if (final === 0)
+            if (final >= 0)
                 return true;
-
-            window.alert(final);
 
             return false;
         }

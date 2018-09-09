@@ -312,7 +312,7 @@
         }
 
         function calcular() {
-            var num1 = Number(document.getElementById("num1").value);
+            var num1 = Number(document.getElementById("num1T").value);
             var num2 = document.getElementById("num2").value;
             // var num3 = Number(document.getElementById("num3").value);
 
@@ -333,7 +333,7 @@
             sub = sub != ''?'R$ '+sub:'';
             sub=sub.replace(/^0+/, '');
 
-            document.getElementById('resultado1').value = sub;
+            document.getElementById('resultadoT').value = sub;
 
         }
         function mostraDesconto(){

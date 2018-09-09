@@ -274,9 +274,9 @@ class SellController extends Controller
 
     public function concluirVenda(Request $request){
 //        dd($request->toArray());
-        $dinheiro = Sell::converteMoedaParaDecimal($request->toArray()['dinheiro']);
-        $debito = Sell::converteMoedaParaDecimal($request->toArray()['debito']);
-        $credito = Sell::converteMoedaParaDecimal($request->toArray()['credito']);
+        $dinheiro = Sell::converteMoedaParaDecimal($request->toArray()['dinheiroT']);
+        $debito = Sell::converteMoedaParaDecimal($request->toArray()['debitoT']);
+        $credito = Sell::converteMoedaParaDecimal($request->toArray()['creditoT']);
         $order = Order::find($request->toArray()['order_id']);
 
         //validar valores preenchidos
@@ -477,9 +477,9 @@ class SellController extends Controller
 	public function vendaParcial(Request $request){
 		//verificar se o item só contem um produto, se for unico troca o order_id do item,
 		//     senão cria um novo item para essa order e subtrai a quantidade de produtos do item da ordem antiga
-        $dinheiro = Sell::converteMoedaParaDecimal($request->toArray()['dinheiro']);
-        $debito = Sell::converteMoedaParaDecimal($request->toArray()['debito']);
-        $credito = Sell::converteMoedaParaDecimal($request->toArray()['credito']);
+        $dinheiro = Sell::converteMoedaParaDecimal($request->toArray()['dinheiroP']);
+        $debito = Sell::converteMoedaParaDecimal($request->toArray()['debitoP']);
+        $credito = Sell::converteMoedaParaDecimal($request->toArray()['creditoP']);
         $orderOriginal = Order::find($request->get('order_id'));
 
         //validar valores preenchidos
