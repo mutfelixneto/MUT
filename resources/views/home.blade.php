@@ -209,7 +209,11 @@
                     {!! Form::token() !!}
                 </div>
                 <div class="modal-footer">
+                    @if(sizeof($vendas) > 0)
                     {!! Form::submit('Vincular!', array('class' => 'btn btn-success')) !!}
+                    @else
+                    {!! Form::submit('Vincular!', array('class' => 'btn btn-success', 'disabled'=>'true')) !!}
+                    @endif
                     {!! Form::close() !!}
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
