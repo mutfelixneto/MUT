@@ -32,7 +32,7 @@
                 <div id="troco" style="display: none;">
                     @if(isset($order))
                         <table class="table">
-                            <tr> <td width="250px">Valor da venda (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num1T" value="R$ {{$order->total}}" disabled="true" /></td></tr>
+                            <tr> <td width="250px">Valor da venda (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num1T" value="R$ {{number_format($order->total, 2,',', '.')}}" disabled="true" /></td></tr>
                             <tr> <td width="250px">Valor Recebido (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num2" onblur="calcular()" /></td></tr>
                             <tr> <td width="250px">Troco (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="resultadoT" disabled="true"/></td></tr>
                         </table>
@@ -116,6 +116,8 @@
             var soma = parseFloat(dinheiroT) + parseFloat(debitoT) + parseFloat(creditoT);
 
             var venda = document.getElementById('num1T').value;
+            venda = venda.replace(/\D/g, '');
+            venda = venda/100;
 
             final = parseFloat(venda).toFixed(2) - parseFloat(soma).toFixed(2);
 
@@ -129,5 +131,6 @@
 
             return false;
         }
+        return true;
     }
 </script>

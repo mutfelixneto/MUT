@@ -286,11 +286,6 @@
             }
         });
 
-        $(".tab-content").click(function(){
-            var newHeight = $(this).height();
-            alert(newHeight)
-        });
-
         function incrementaProduto($id) {
             document.getElementById($id).stepUp(1);
         }
@@ -367,7 +362,7 @@
             }else
                 num3 = 0;
 
-            var sub = num2 - num1 - num3;
+            var sub = num2 - (num1 - num3);
             sub=sub.toFixed(2);
             sub=sub.toString();
             sub=sub.replace(/\D/g,'');
@@ -376,7 +371,7 @@
             sub = sub != ''?'R$ '+sub:'';
             sub=sub.replace(/^0+/, '');
 
-            if(num2 < (num1 +num3))
+            if(num2 < (num1 - num3))
                 document.getElementById('resultadoT').value = "-"+sub;
             else
                 document.getElementById('resultadoT').value = sub;

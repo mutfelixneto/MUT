@@ -10,7 +10,7 @@
                 @php
                     if(isset($order))
                         if(\App\Http\Controllers\OrderController::possuiPagamento($order)){
-                        echo '<input type="hidden" id="num1P" value="'.$order->total.'"/>';
+                        echo '<input type="hidden" id="num1P" value="R$ '.number_format($order->total, 2,',', '.').'"/>';
                     echo '<br><p style="display:inline; vertical-align: middle;font-weight: bold">Informe o valor a ser pago: </p>
                     <select class="" id="formaPagamentoParcial" name="formaPagamento" style="width: 212px;" disabled="true">
                         <option value="4">Múltiplo</option>
@@ -127,6 +127,8 @@
             var soma = parseFloat(dinheiroP) + parseFloat(debitoP) + parseFloat(creditoP);
 
             var venda = document.getElementById('num1P').value;
+            venda = venda.replace(/\D/g, '');
+            venda = venda / 100;
 
             final = parseFloat(venda).toFixed(2) - parseFloat(soma).toFixed(2);
 
@@ -138,6 +140,7 @@
 
             return false;
         }
+        return true;
     }
 
 </script>
