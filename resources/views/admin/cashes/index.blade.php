@@ -223,21 +223,50 @@
                 </div>
                 {!! Form::open(array('action' => 'CashController@fecharCaixa', 'method' => 'post')) !!}
                 <div class="modal-body">
-                        Deseja realmente fechar o caixa? <br>
+                    <p style="text-align: center">Deseja realmente fechar o caixa? </p><br>
                         @if($caixa != null)
-                        O valor atual em caixa deve ser <span style="font-size: 25px">{{$caixa->getValorTotalFormatado()}}</span>.<br>
+                            <table class="table">
+                                <tr>
+                                    <td width="70%">Valor de abertura: </td>
+                                    <td>{{$caixa->getValorAberturaFormatado()}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dinheiro: </td>
+                                    <td>{{\App\Http\Controllers\CashMovesController::buscaValoresDinheiro($caixa->id)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Débito: </td>
+                                    <td>{{\App\Http\Controllers\CashMovesController::buscaValoresDebito($caixa->id)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito: </td>
+                                    <td>{{\App\Http\Controllers\CashMovesController::buscaValoresCredito($caixa->id)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Entradas: </td>
+                                    <td>{{\App\Http\Controllers\CashMovesController::buscaValoresEntradas($caixa->id)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Saídas: </td>
+                                    <td>{{\App\Http\Controllers\CashMovesController::buscaValoresSaidas($caixa->id)}}</td>
+                                </tr>
+                                <tfoot style="width: auto">
+                                    <th width="65%" style="font-size: 25px">TOTAL </th>
+                                    <th width="35%" style="font-size: 20px">{{\App\Http\Controllers\CashMovesController::buscaValorTotal($caixa->id)}}</th>
+                                </tfoot>
+                            </table>
                             {{Form::hidden('cash_id', $caixa->id)}}
                         @endif
-                        Valor Confere?
+                        <div style="text-align: center">Valor Confere?
                         <select id="confirma" onclick="confirmar()" required>
                             <option value="">Selecione...</option>
                             <option value="1">Sim</option>
                             <option value="2">Não</option>
-                        </select>
+                        </select></div>
                         <div id="obs" style="display: none">
                             <br>
                             Informe uma observação:
-                            <textarea id="observacao" name="obs" style="width:500px"></textarea>
+                            <textarea id="observacao" name="obs" style="width:550px"></textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
