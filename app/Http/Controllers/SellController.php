@@ -279,13 +279,6 @@ class SellController extends Controller
         $credito = Sell::converteMoedaParaDecimal($request->toArray()['creditoT']);
         $order = Order::find($request->toArray()['order_id']);
 
-        //validar valores preenchidos
-        if($order->total < ($dinheiro+$credito+$debito)){
-            flash()->overlay('teste','Não foi possível realizar o pagamento. Valor informado é maior do que o valor total da venda!');
-            return Redirect::to('/home');
-        }
-
-
         $order->pay_method = $request->toArray()['formaPagamento'];
 //        $order->total = $debito + $credito + $dinheiro;
         $order->debit = $debito;
@@ -481,12 +474,6 @@ class SellController extends Controller
         $debito = Sell::converteMoedaParaDecimal($request->toArray()['debitoP']);
         $credito = Sell::converteMoedaParaDecimal($request->toArray()['creditoP']);
         $orderOriginal = Order::find($request->get('order_id'));
-
-        //validar valores preenchidos
-        if($orderOriginal->total < ($dinheiro+$credito+$debito)){
-            flash()->overlay('teste','Não foi possível realizar o pagamento. Valor informado é maior do que o valor total da venda!');
-            return Redirect::to('/home');
-        }
 
 		$parcial = new Order();
 		//setar forma de pagamento, e valor total da ordem derivada,
