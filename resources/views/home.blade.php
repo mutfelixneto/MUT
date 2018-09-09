@@ -272,6 +272,10 @@
             var y = document.getElementById("tabsCategorias").style.height;
             var z = y.replace(/\D/g,'');
             var tabCount = $('#tabsCategorias > ul> li').length;
+            if(tabCount > 0 && tabCount < 8) {
+                z = z - 45  ;
+                $(".chico").css({"height": z + "px"}) ;
+            }
             if(tabCount > 7 && tabCount < 15) {
                 z = z - 90  ;
                 $(".chico").css({"height": z + "px"}) ;
