@@ -248,7 +248,7 @@
                                 </tr>
                                 <tr>
                                     <td>Saídas: </td>
-                                    <td>{{\App\Http\Controllers\CashMovesController::buscaValoresSaidas($caixa->id)}}</td>
+                                    <td> - {{\App\Http\Controllers\CashMovesController::buscaValoresSaidas($caixa->id)}}</td>
                                 </tr>
                                 <tfoot style="width: auto">
                                     <th width="65%" style="font-size: 25px">TOTAL </th>
