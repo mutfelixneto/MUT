@@ -32,9 +32,9 @@
                 <div id="troco" style="display: none;">
                     @if(isset($order))
                         <table class="table">
-                            <tr> <td width="250px">Valor da venda (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num1T" value="{{$order->total}}" disabled="true" /></td></tr>
+                            <tr> <td width="250px">Valor da venda (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num1T" value="R$ {{$order->total}}" disabled="true" /></td></tr>
                             <tr> <td width="250px">Valor Recebido (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="num2" onblur="calcular()" /></td></tr>
-                            <tr> <td width="250px">Troco (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="resultadoT" /></td></tr>
+                            <tr> <td width="250px">Troco (R$): </td> <td width="250px"><input style="width: 90px" type="text" id="resultadoT" disabled="true"/></td></tr>
                         </table>
                     @endif
                 </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div id="valorDesconto" style="display: none;">
                     <table class="table">
-                        <tr><td width="250px">Desconto: </td> <td width="250px"><input style="width: 90px" id="num3" name="valorDesconto" type="text" step="0.01"></td></tr>
+                        <tr><td width="250px">Desconto: </td> <td width="250px"><input style="width: 90px" id="num3" name="valorDesconto" type="text" onblur="calcular()"></td></tr>
                     </table>
                 </div>
                 @php
