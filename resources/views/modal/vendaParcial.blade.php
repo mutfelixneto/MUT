@@ -19,7 +19,7 @@
                         if(isset($order))
                             echo '<table class="table">
                             <tr>
-                                <td>Valor dinheiroP: </td>
+                                <td>Valor Dinheiro: </td>
                                 <td><input style="width:120px" id="dinheiroP" name="dinheiroP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             <tr>
@@ -55,7 +55,7 @@
                             echo '
                             <table class="table">
                             <tr>
-                                <td>Valor dinheiroP: </td>
+                                <td>Valor Dinheiro: </td>
                                 <td><input style="width:120px" id="dinheiroP" name="dinheiroP" type="text" max="'.$order->total.'"  ></td>
                             </tr>
                             <tr>

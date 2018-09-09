@@ -42,7 +42,7 @@
                     @if(isset($order))
                         <table class="table">
                             <tr>
-                                <td>Valor dinheiroT: </td>
+                                <td>Valor Dinheiro: </td>
                                 <td><input style="width:120px" id="dinheiroT" name="dinheiroT" type="text" max="'.$order->total.'"></td>
                             </tr>
                             <tr>
