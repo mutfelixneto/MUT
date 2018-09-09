@@ -6,7 +6,7 @@
                 <h4 class="modal-title titulo" id="titulo"></h4>
             </div>
             {!! Form::open(array('action' => 'SellController@addProducts', 'method' => 'post')) !!}
-            <div class="modal-body task" id="task" style="overflow-y: scroll;height: 450px">
+            <div class="modal-body task" id="task" style="overflow-y: auto;max-height: 450px">
             </div>
             <div class="modal-footer">
                 @php
