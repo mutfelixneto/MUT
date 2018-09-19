@@ -6,7 +6,7 @@
                 <h4 class="modal-title" id="myModalLabel">Venda Parcial</h4>
             </div>
             {!! Form::open(array('action' => 'SellController@vendaParcial', 'method' => 'post', 'onsubmit' => 'return enviardadosP();')) !!}
-            <div class="modal-body">
+            <div class="modal-body" style="overflow-y: auto;max-height: 450px">
                 @php
                     if(isset($order))
                         if(\App\Http\Controllers\OrderController::possuiPagamento($order)){
