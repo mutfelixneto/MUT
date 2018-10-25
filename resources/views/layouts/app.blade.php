@@ -63,10 +63,13 @@
                 Icon::user().' '.Auth::user()->name,
                 [
                     [
-                            'link' => route('logout'),
-                            'title' => 'Logout &ensp;'.Icon::create('log-out'),
-                            'linkAttributes' => [
-                                'onclick' => "event.preventDefault();getElementById(\"form-logout\").submit();"
+                            'link' => route('admin.company.index'),
+                            'title' => 'Configurações '.Icon::create('cog')
+                            ]
+                            ,[
+                                'link' => route('logout'),
+                                'title' => 'Logout &ensp;'.Icon::create('log-out'),
+                                'linkAttributes' => ['onclick' => "event.preventDefault();getElementById(\"form-logout\").submit();"
                             ]
                         ]
                     ]

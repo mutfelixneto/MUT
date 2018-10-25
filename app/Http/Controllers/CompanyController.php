@@ -14,7 +14,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $company = Company::find(1);
+        return view('admin.company.index', compact('company'));
     }
 
     /**
@@ -81,5 +82,19 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         //
+    }
+
+    public function atualizar(Request $request)
+    {
+        $empresa = Company::find(1);
+        $empresa->name = $request->get('name');
+        $empresa->cnpj = $request->get('cnpj');
+        $empresa->address = $request->get('address');
+        $empresa->phone = $request->get('phone');
+        $empresa->msg = $request->get('msg');
+
+        $empresa->update();
+        $request->session()->flash('message', 'Informações atualizadas com sucesso!');
+        return redirect()->route('admin.company.index');
     }
 }

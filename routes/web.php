@@ -73,6 +73,7 @@ Route::prefix('admin')->group(function(){
         Route::resource('providers', 'ProviderController');
         Route::resource('bonifications', 'BonificationController');
         Route::resource('cashes', 'CashController');
+        Route::resource('company', 'CompanyController');
     });
 });
 
@@ -91,3 +92,4 @@ Route::post('/vincularMesa', 'DeskController@vincularMesa')->name('vincularMesa'
 Route::post('/criarMesaVenda', 'DeskController@criarMesaVenda')->name('criarMesaVenda');
 Route::post('/excluirMesa', 'DeskController@excluirMesa')->name('excluirMesa');
 Route::post('/imprimirCupom', 'SellController@imprimirCupom')->name('imprimirCupom');
+Route::post('/dadosEmpresa', 'CompanyController@atualizar')->name('dadosEmpresa');

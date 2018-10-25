@@ -189,6 +189,7 @@ class DatabaseSeeder extends Seeder
             'name' =>'Goyanu\'s Spetus',
             'phone' => '(67) 3305-4893',
             'address' => 'Rua José Gomes Domingues, 1337 - Bairro Santa Fé - Campo Grande/MS',
+            'cnpj' => '01.001.001/00001-01',
             'msg' => 'Agradecemos a preferência! Volte Sempre!',
         ]);
 

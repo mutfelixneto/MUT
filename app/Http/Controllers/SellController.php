@@ -228,7 +228,7 @@ class SellController extends Controller
     public function listaProdutosPorMarca($products = array())
     {
         $divs = [];
-        $divHeader = '<table class="table table-bordered" style="font-size: 13px; color:black">
+        $divHeader = '<table class="table table-bordered" style="font-size: 10px; color:black">
                     <tr>
                         <th>Cód - Nome</th>
                         <th style="text-align: center">Estoque</th>
@@ -433,7 +433,7 @@ class SellController extends Controller
 	{
 		$itens = Item::all()->where('order_id', '=', $order->id);
 		$divs = [];
-		$divHeader = '<table class="table table-bordered" style="font-size: 13px; color:black">
+		$divHeader = '<table class="table table-bordered" style="font-size: 10px; color:black">
                         <tr>
                             <th style="text-align: center">Descrição</th>
                             <th style="text-align: center">Quantidade</th>
@@ -729,18 +729,20 @@ class SellController extends Controller
         $itens = Item::hydrate($itens);
 
         $company = Company::find(1);
-        $cabecalhoLoja = '<p style="font-size: 13px; line-height: 10%;">'.$company->name.'</p>
-                            <p style="font-size: 13px; line-height: 80%;width: 250px;">'.$company->address.'</p>
-                            <p style="font-size: 13px;line-height: 10%;">'.$company->phone.'</p>';
+        $cabecalhoLoja = '<h1 style=" line-height: 10%; text-align: center;">'.$company->name.'</h1>
+                            <h5 style="line-height: 80%;width: 250px; text-align: center;">'.$company->phone.'</h5>
+                            <p style="font-size: 10px; line-height: 80%;width: 250px;">'.$company->address.'</p>
+                            <p style="font-size: 10px;line-height: 10%;">CNPJ: '.$company->cnpj.'</p> 
+                            <hr><p style="font-weight: bold; font-size: 12px; text-align: center; margin-top: -8px; margin-bottom: -5px">*** sem valor fiscal ***</p>';
 
 
-        $tableHeader = '<table class="table table-condensed" style="width: 250px;font-size: 13px">
+        $tableHeader = '<table class="table table-condensed" style="width: 280px;font-size: 10px">
                             <tr>
-                                <th>Cod.</th>
-                                <th>Prod.</th>
-                                <th style="text-align: center;">Qtd.</th>
-                                <th style="text-align: center;">Vlr Unid.</th>
-                                <th style="text-align: center;">Vlr Total</th>
+                                <th style="text-align: left;">Cod.</th>
+                                <th style="text-align: left;">Prod.</th>
+                                <th style="text-align: left;">Qtd.</th>
+                                <th style="text-align: right;">Vlr Unid.</th>
+                                <th style="text-align: right;">Vlr Total</th>
                             </tr>';
         $tableCont = [];
         $total = 0;
@@ -758,9 +760,9 @@ class SellController extends Controller
             $tupla = '      <tr>
                                 <td style="vertical-align: middle" align="left">'.$product->barcode.'</td>
                                 <td style="vertical-align: middle" align="left">'.$product->name.'</td>
-                                <td align="center" style="vertical-align: middle">'.$item->qtd.'</td>
-                                <td align="center" style="vertical-align: middle;  color: #000000;">'.number_format($price, 2, ',', '.').'</td>
-                                <td align="center" style="vertical-align: middle;  color: #000000;">'.number_format($item->total, 2, ',', '.').'</td>
+                                <td align="left" style="vertical-align: middle">'.$item->qtd.'</td>
+                                <td align="right" style="vertical-align: middle;  color: #000000;">'.number_format($price, 2, ',', '.').'</td>
+                                <td align="right" style="vertical-align: middle;  color: #000000;">'.number_format($item->total, 2, ',', '.').'</td>
                             </tr>';
             array_push($tableCont, $tupla);
             $total += $item->total;
@@ -773,7 +775,7 @@ class SellController extends Controller
                 $valorPago = \App\Http\Controllers\OrderController::valorPago($order);
 
             if($valorPago > 0){
-                $valorTotal = '<TABLE CLASS="table table-condensed" style="width: 250px;font-size: 13px">
+                $valorTotal = '<TABLE CLASS="table table-condensed" style="width: 250px;font-size: 10px">
                                    <TR>
                                        <TH  style="text-align: left;">VALOR TOTAL:</TH>
                                        <TH style="text-align: right;">R$'.number_format($total, 2, ',', '.').'</TH>
@@ -788,16 +790,16 @@ class SellController extends Controller
                                    </TR>
                                </TABLE>';
             }else{
-                $valorTotal = '<TABLE CLASS="table table-condensed" style="width: 250px;font-size: 13px"><TR><TH  style="text-align: left;">VALOR TOTAL:</TH><TH style="text-align: right;">R$'.number_format($total, 2, ',', '.').'</TH></TR></TABLE>';
+                $valorTotal = '<TABLE CLASS="table table-condensed" style="width: 250px;font-size: 10px"><TR><TH  style="text-align: left;">VALOR TOTAL:</TH><TH style="text-align: right;">R$'.number_format($total, 2, ',', '.').'</TH></TR></TABLE>';
             }
 
-        $msgAmistosa = '<p style="font-size: 13px">'.$company->msg.'</p>';
+        $msgAmistosa = '<p style="font-size: 10px">'.$company->msg.'</p>';
 
         $bonificacoesTable = '';
         if(OrderController::possuiBonificacao($order)) {
             $bonificacoes = OrderController::bonificacoes($order);
-            $bonificaDescricao = '<BR><p style="font-size: 13px; line-height: 10%;">BONIFICAÇÕES</p>';
-            $bonificaTableHead = '<table class="table table-condensed" style="width: 250px;font-size: 13px">
+            $bonificaDescricao = '<BR><p style="font-size: 10px; line-height: 10%;">BONIFICAÇÕES</p>';
+            $bonificaTableHead = '<table class="table table-condensed" style="width: 250px;font-size: 10px">
                             <tr>
                                 <th>Cod.</th>
                                 <th>Prod.</th>
