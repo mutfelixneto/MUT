@@ -65,7 +65,7 @@
                     {!! Button::danger(Icon::create('link'))->addAttributes(['style' => 'display: inline;margin-left:30px; margin-right:-35px; height:40px;', 'data-toggle' => 'modal', 'data-target' => '#removerAssociadoModal', 'rel'=>'tooltip', 'title'=>'Aplicar desconto conforme tabela'])  !!}
                     {!! Button::primary(Icon::create('credit-card'))->addAttributes(['style' => 'display: inline;margin-left:30px; margin-right:-35px; height:40px;', 'disabled' => 'true', 'rel'=>'tooltip', 'title'=>'Aplicar taxa do cartão conforme tabela'])  !!}
                 @endif
-                    {!! Form::open(array('action' => 'SellController@imprimirCupom', 'method' => 'post', 'style' => 'display:inline')) !!}
+                    {!! Form::open(array('action' => 'SellController@imprimirCupom', 'method' => 'post', 'style' => 'display:inline', 'target'=>'_blank')) !!}
                     {!! Form::hidden('order_id',$order->id) !!}
                     {!! Form::button(Icon::create('list-alt'), ['type' => 'submit', 'class' => 'btn btn-primary btn-sm', 'style' => 'width:40px;display: inline;margin-left:30px; margin-right:-35px; height:40px;', 'rel'=>'tooltip', 'title'=>'Imprimir cupom da venda'] )  !!}
                     {!! Form::close() !!}

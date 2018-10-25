@@ -828,10 +828,10 @@ class SellController extends Controller
         $string = $cabecalhoLoja.$tableHeader.$tableCont.$tableFooter.$valorTotal. $bonificacoesTable.$msgAmistosa;
 
 
-//        return view('admin.sells.cupom', compact('string'));
-//
-        $pdf = PDF::loadView( 'admin.sells.cupom', compact( 'string' ) );
-        return $pdf->download( 'Cupom_Venda_'.$order->id.'.pdf' );
+        return view('admin.sells.cupom', compact('string'));
+////
+//        $pdf = PDF::loadView( 'admin.sells.cupom', compact( 'string' ) );
+//        return $pdf->download( 'Cupom_Venda_'.$order->id.'.pdf' );
     }
 
 }
