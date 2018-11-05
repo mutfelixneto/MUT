@@ -17,6 +17,10 @@ class ClientForm extends Form
                 'label' => 'Razão Social',
                 'rules' => 'required'
             ])
+            ->add('cnpj', 'text', [
+                'label' => 'CNPJ',
+                'rules' => 'max:16'
+            ])
 	        ->add('phone1', 'text', [
 		        'label' => 'Tel. Celular',
 		        'rules' => 'max:11|required'])

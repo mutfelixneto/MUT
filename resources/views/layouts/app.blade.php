@@ -17,7 +17,7 @@
 <body>
 <div id="app">
     @php
-        $logo = asset('storage/images/brands/mutPreto.jpg');
+        $logo = asset('storage/images/logo456.jpg');
         $navbar = Navbar::withBrandImage($logo, route('home'), config('app.name'))->inverse();
          if(Auth::check()){
             if(Auth::user()->name == 'ADMIN'){
