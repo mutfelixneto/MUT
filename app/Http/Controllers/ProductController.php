@@ -111,6 +111,14 @@ class ProductController extends Controller
 //        $data['price_card'] = str_replace($source, $replace, $data['price_card']);
         $data['status'] = $data['status'] == null ? 0 : 1;
 
+        $teste = DB::table('products')->where('barcode','=', $data['barcode'])->count('*');
+        if($teste > 0) {
+            session()->flash('message', 'Código de Barras já cadastrado em outro produto!');
+            return redirect()
+                ->back()
+                ->withInput();
+        }
+
         Product::create($data);
 
         $request->session()->flash('message', 'Produto cadastrado com sucesso!');
@@ -171,8 +179,16 @@ class ProductController extends Controller
         $data['price_discount'] = Sell::converteMoedaParaDecimal($data['price_discount']);
         $data['price_card'] = Sell::converteMoedaParaDecimal($data['price_card']);
         $data['status'] = $data['status'] == null ? 0 : 1;
-        $product->update($data);
 
+        $teste = DB::table('products')->where('barcode','=', $data['barcode'])->where('id', '<>',$product->id)->count('*');
+        if($teste > 0) {
+            session()->flash('message', 'Código de Barras já cadastrado em outro produto!');
+            return redirect()
+                ->back()
+                ->withInput();
+        }
+
+        $product->update($data);
         session()->flash('message', 'Produto alterado com sucesso!');
         return redirect()->route('admin.products.index');
     }

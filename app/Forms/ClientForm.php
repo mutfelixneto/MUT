@@ -23,7 +23,7 @@ class ClientForm extends Form
             ])
 	        ->add('phone1', 'text', [
 		        'label' => 'Tel. Celular',
-		        'rules' => 'max:11|required'])
+		        'rules' => 'max:11'])
         ;
     }
 }
